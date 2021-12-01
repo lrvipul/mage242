@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<quickquote>
+			<general>
+				<enabled>1</enabled>
+				<route>quick-quote</route>
+				<instant_search>1</instant_search>
+				<enable_multiskus>1</enable_multiskus>
+				<enable_upload>1</enable_upload>
+				<title>Quick Quote</title>
+				<show_toplinks>1</show_toplinks>
+				<head_background_color>#ff9900</head_background_color>
+				<head_color>#FFFFFF</head_color>
+				<button_color>#ff9900</button_color>
+				<spinner_color>#ff9900</spinner_color>
+			</general>
+			<search>
+				<min_length>3</min_length>
+				<show_image>1</show_image>
+				<show_sku>1</show_sku>
+				<show_price>1</show_price>
+			</search>
+		</quickquote>
+	</default>
+</config>

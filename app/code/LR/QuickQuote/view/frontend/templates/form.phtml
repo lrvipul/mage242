@@ -1,0 +1,120 @@
+<?php
+$coreHelper          = $this->helper('\Magezon\Core\Helper\Data');
+$dataHelper          = $this->helper('\LR\QuickQuote\Helper\Data');
+$instantSearch       = $dataHelper->isInstanceSearchEnabled();
+$enableMultiskus     = $dataHelper->getConfig('general/enable_multiskus');
+$enableUpload        = $dataHelper->getConfig('general/enable_upload');
+$headBackgroundColor = $dataHelper->getConfig('general/head_background_color');
+$headColor           = $dataHelper->getConfig('general/head_color');
+$btnColor            = $dataHelper->getConfig('general/button_color');
+$spinnerColor        = $dataHelper->getConfig('general/spinner_color');
+$linkColor           = $dataHelper->getConfig('general/link_color');
+$minLength           = $dataHelper->getConfig('search/min_length');
+$searchImage         = $dataHelper->getConfig('search/show_image');
+$searchSku           = $dataHelper->getConfig('search/show_sku');
+$searchPrice         = $dataHelper->getConfig('search/show_price');
+$storageKey          = $block->hasData('storageKey') ? $block->getData('storageKey') : 'quickquoteItems';
+$loadProductsUrl     = $block->hasData('loadProductsUrl') ? $block->getData('loadProductsUrl') : $block->getUrl('quickquote/index/loadproducts');
+$loadProductsUrl     = $block->hasData('loadProductsUrl') ? $block->getData('loadProductsUrl') : $block->getUrl('quickquote/index/loadproducts');
+$loadItemInfoUrl     = $block->hasData('loadItemInfoUrl') ? $block->getData('loadItemInfoUrl') : $block->getUrl('quickquote/index/item');
+$actionUrl           = $block->hasData('actionUrl') ?  $block->getUrl($block->getData('actionUrl')) : $block->getUrl('quickquote/quotes/save');
+$showImage           = $block->hasData('showImage') ? $block->getData('showImage') : true;
+$showPrice           = $block->hasData('showPrice') ? $block->getData('showPrice') : true;
+$showQty             = $block->hasData('showQty') ? $block->getData('showQty') : true;
+$showSubTotal        = $block->hasData('showSubTotal') ? $block->getData('showSubTotal') : true;
+$showAction          = $block->hasData('showAction') ? $block->getData('showAction') : true;
+$showGrandTotal      = $block->hasData('showGrandTotal') ? $block->getData('showGrandTotal') : true;
+$showSku             = $block->hasData('showSku') ? $block->getData('showSku') : true;
+$showEmptyBtn        = $block->hasData('showEmptyBtn') ? $block->getData('showEmptyBtn') : true;
+$showQty             = $block->hasData('showQty') ? $block->getData('showQty') : true;
+/* $submitBtnLabel      = $block->hasData('submitBtnLabel') ? $block->getData('submitBtnLabel') : __('Add to Cart'); */
+$submitBtnLabel      = $block->hasData('submitBtnLabel') ? $block->getData('submitBtnLabel') : __('Save Quote');
+$mode                =  'quickquote';
+?>
+<div class="quickquote-form" data-bind="scope: 'quickquote'">
+	<!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="quickquote-popup" class="white-popup mfp-with-anim mfp-hide" data-effect="mfp-zoom-in">
+	<div class="quickquote-popup-wrapper">
+		<div class="quickquote-popup-content"></div>
+	</div>
+    <div class="quickquote-popup-loader">
+        <div class="quickquote-popup-loader-bar"></div>
+    </div>
+</div>
+<style>
+<?php if ($spinnerColor) { ?>
+#quickquote-popup .quickquote-popup-loader .quickquote-popup-loader-bar {
+    background: <?= $spinnerColor ?>;
+}
+.quickquote-spinner i {
+    border-color: <?= $spinnerColor ?>;
+    border-top-color: transparent;
+}
+<?php } ?>
+<?php if ($headBackgroundColor) { ?>
+.lr-quickquote thead tr th.col {
+    background: <?= $headBackgroundColor ?>;
+}
+<?php } ?>
+<?php if ($headColor) { ?>
+.lr-quickquote thead tr th.col {
+    color: <?= $headColor ?>;
+}
+<?php } ?>
+<?php if ($btnColor) { ?>
+#quickquote-popup .action.action-select:hover {
+    opacity: .8;
+}
+#quickquote-popup .action.action-select,
+.lr-quickquote .quickquote-btn {
+    background: <?= $btnColor ?>;
+    border-color: <?= $btnColor ?>;
+}
+<?php } ?>
+<?php if ($linkColor) { ?>
+#quickquote-popup .action-cancel,
+.lr-quickquote a {
+    color: <?= $linkColor ?>;
+}
+<?php } ?>
+</style>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "quickquote": {
+                    "component": "LR_QuickQuote/js/editor",
+                    "storageKey": "<?= $storageKey ?>",
+                    "enableMultiskus": <?= $enableMultiskus ? 'true' : 'false' ?>,
+                    "enableUpload": <?= $enableUpload ? 'true' : 'false' ?>,
+                    "ajaxUrl": "<?= $loadProductsUrl ?>",
+                    "loadChildrensUrl": "<?= $block->getUrl('quickquote/index/loadChildrens') ?>",
+                    "priceFormat": <?= $coreHelper->serialize($block->getPriceFormat()) ?>,
+                    "loadItemInfoUrl": "<?= $loadItemInfoUrl ?>",
+                    "minLength": "<?= $minLength ? $minLength : 0 ?>",
+                    "actionUrl": "<?= $actionUrl ?>",
+                    "instantSearch": <?= $instantSearch ? 'true' : 'false' ?>,
+                    "showImage": <?= $showImage ? 'true' : 'false' ?>,
+                    "showPrice": <?= $showPrice ? 'true' : 'false' ?>,
+                    "showQty": <?= $showQty ? 'true' : 'false' ?>,
+                    "showSubTotal": <?= $showSubTotal ? 'true' : 'false' ?>,
+                    "showAction": <?= $showAction ? 'true' : 'false' ?>,
+                    "showGrandTotal": <?= $showGrandTotal ? 'true' : 'false' ?>,
+                    "showSku": <?= $showSku ? 'true' : 'false' ?>,
+                    "showEmptyBtn": <?= $showEmptyBtn ? 'true' : 'false' ?>,
+                    "search": {
+                        "showImage": <?= $searchImage ? 'true' : 'false' ?>,
+                        "showSku": <?= $searchSku ? 'true' : 'false' ?>,
+                        "showPrice": <?= $searchPrice ? 'true' : 'false' ?>
+                    },
+                    "submitBtnLabel": "<?= $submitBtnLabel ?>",
+                    "mode": "<?= $mode ?>",
+                    "downloadSampleLink": "<?= $block->getViewFileUrl('LR_QuickQuote/css/quickquote_import.csv') ?>"
+                }
+            }
+        }
+    }
+}
+</script>

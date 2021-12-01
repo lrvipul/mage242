@@ -1,0 +1,20 @@
+<?php
+$imageHelper = $this->helper('\Magezon\Core\Helper\Image');
+$product     = $block->getProduct();
+$bottomHtml  = $block->getLayout()->getBlock('ajax.product.bottom')->getChildHtml();
+?>
+<div class="ajaxquote-content">
+	<div class="ajaxquote-content_left">
+		<?= $block->getImage($product, 'quickquote_popup_image')->toHtml() ?>
+	</div>
+	<div class="ajaxquote-content_right">
+		<?= $block->getChildHtml('product_info_main') ?>
+	</div>
+</div>
+<?php if ($bottomHtml) { ?>
+<div class="ajaxquote-bottom"><?= $bottomHtml ?></div>
+<?php } ?>
+<div class="ajaxquote-footer">
+	<a href="#" class="action-cancel"><?= __('Cancel') ?></a>
+	<button class="action primary action-select"><?= __('Select') ?></button>
+</div>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page layout="empty" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<block class="LR\QuickQuote\Block\Product" name="ajax.product.info" template="LR_QuickQuote::product.phtml"/>
+		<move element="product.info.main" destination="ajax.product.info" as="product_info_main"/>
+		<referenceContainer name="product.info.social" remove="true"/>
+		<referenceBlock name="product.info.review" remove="true"/>
+		<referenceBlock name="product.info.overview" remove="true"/>
+		<referenceBlock name="product.info.addtocart.instantPurchase" remove="true"/>
+		<referenceBlock name="product.info.addtocart.instantPurchase.additional" remove="true"/>
+		<referenceBlock name="product.info.addtocart" remove="true"/>
+		<referenceBlock name="product.info.addtocart.additional" remove="true"/>
+		<block class="Magento\Framework\View\Element\Template" name="ajax.product.bottom"/>
+	</body>
+</page>

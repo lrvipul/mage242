@@ -1,0 +1,52 @@
+Product %1 does not exist. Please remove and add it again.,Product %1 does not exist. Please remove and add it again.
+Something went wrong while processing the request.,Something went wrong while processing the request.
+Something went wrong when adding %1 to cart. Please check it again.,Something went wrong when adding %1 to cart. Please check it again.
+An error occurred while processing your request. Please try again later.,An error occurred while processing your request. Please try again later.
+Add to Cart,Add to Cart
+Cancel,Cancel
+Select,Select
+Search,Search
+Item,Item
+Price,Price
+Qty,Qty
+Subtotal,Subtotal
+Action,Action
+SKU#:,SKU#:
+Type:,Type:
+Edit,Edit
+Add from file,Add from file
+Choose File,Choose File
+Download Sample Csv,Download Sample Csv
+Enter SKU or Product Name,Enter SKU or Product Name
+Add Line,Add Line
+Total value:,Total value:
+Empty List,Empty List
+Are you sure you would like to empty this list?,Are you sure you would like to empty this list?
+Enter Multiple SKUs,Enter Multiple SKUs
+Use commas or paragraph to separate SKUs.,Use commas or paragraph to separate SKUs.
+Add to List,Add to List
+"File must be in .csv format and include ""SKU"" and ""QTY"" columns","File must be in .csv format and include ""SKU"" and ""QTY"" columns"
+File was imported sucessfully,File was imported sucessfully
+Please specify product option(s).,Please specify product option(s).
+Quick Ouote,Quick Ouote
+General Settings,General Settings
+Current Version,Current Version
+Enable Quick Ouote,Enable Quick Ouote
+Route,Route
+https://domain.com/<strong>quick-quote</strong>,https://domain.com/<strong>quick-quote</strong>
+Enable Add Multiple SKUs,Enable Add Multiple SKUs
+Enable Upload File,Enable Upload File
+Title,Title
+Show in Top Links,Show in Top Links
+Head Background Color,Head Background Color
+Head Color,Head Color
+Button Color,Button Color
+Spinner Color,Spinner Color
+Link Color,Link Color
+Allow Customer Groups,Allow Customer Groups
+Autocomplete minimum characters,Autocomplete minimum characters
+The minimum number of characters a user must type before a search is performed.,The minimum number of characters a user must type before a search is performed.
+Show Image,Show Image
+Show Sku,Show Sku
+Show Price,Show Price
+LR Quick Ouote Form,LR Quick Ouote Form

@@ -1,0 +1,132 @@
+<div class="lr-quickquote">
+	<table class="items data table">
+		<thead>
+			<tr>
+				<th class="col search">
+					<span data-bind="i18n: 'Search'"/>
+				</th>
+				<th class="col item">
+					<span data-bind="i18n: 'Item'"/>
+				</th>
+				<th class="col price" if="showPrice">
+					<span data-bind="i18n: 'Price'"/>
+				</th>
+				
+				<th class="col qty" if="showQty">
+					<span data-bind="i18n: 'Qty'"/>
+				</th>
+				<th class="col subtotal" if="showSubTotal">
+					<span data-bind="i18n: 'Subtotal'"/>
+				</th>
+				<th class="col action" if="showAction">
+					<span data-bind="i18n: 'Action'"/>
+				</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: items">
+			<tr class="item-info">
+				<td class="col search">
+					<div class="lr-quickquote-search">
+						<input type="text" data-bind="textInput: search" attr="id: uid,placeholder: $parent.searchPlaceholder" autocomplete="off"/>
+						<div class="lr-quickquote-spinner" if="spinnerloading"><i></i></div>
+						<div attr="id: 'lr-quickquote-ui-'+ uid" class="lr-quickquote-ui-wrapper" afterRender="initAutoComplete"></div>
+					</div>
+				</td>
+				<td class="col item">
+					<div class="item-info-inner" if="product">
+						<div class="product-item-photo" if="$parent.showImage">
+							<span class="product-image-container">
+								<span class="product-image-wrapper">
+									<img attr="src: product().img, alt: product().name"/>
+								</span>
+							</span>
+						</div>
+						<div class="product-item-details">
+							<strong class="product-item-name">
+								<a attr="href: product().url" text="product().name"/>
+							</strong>
+							<div class="product-item-sku"><b data-bind="i18n: 'SKU#:'"/> <span text="product().sku"></span></div>
+							<div class="product-quote-type" if="$parent.mode=='quickquote' &&product().quoteTypes"><b data-bind="i18n: 'Type:'"/> 
+								<select data-bind="options: product().quoteTypes,
+			                       optionsText: 'label',
+			                       optionsValue: 'value',
+			                       value: quoteType" style="width: auto"></select>
+			                    </div>
+							<div class="quickquote-message message error" if="message"><span text="message"/></div>
+							<div class="item-options-wrapper" html="optionsHtml" if="product&&optionsHtml"/>
+							<a href="#" class="quickquote-action-edit" data-bind="i18n: 'Edit'" if="product().canConfigure||product().openmodal" click="parent.openPopup"/>
+						</div>
+					</div>
+				</td>
+				<td class="col price" if="$parent.showPrice">
+					<div class="quickquote-spinner" if="loadingPrice()"><i></i></div>
+					<span class="price" text="$parent.getFormattedPrice(price())" if="product&&!loadingPrice()"/>
+					
+					<a href="#" class="quickquote-btn action-updateprice" if="product" click="$parent.updatePrice">../</a>
+					<input type="number" data-bind="value: price" min="1" class="input-text qty" if="product" visible="0"/>
+				</td>
+				<td class="col qty" if="$parent.showQty">
+					<input type="number" data-bind="value: qty" min="1" class="input-text qty" if="product" visible="qtyVisible"/>
+				</td>
+				<td class="col subtotal" if="$parent.showSubTotal">
+					<div class="quickquote-spinner" if="loadingPrice()"><i></i></div>
+					<span class="price" text="$parent.getFormattedPrice(subtotal())" if="product&&!loadingPrice()"/>
+				</td>
+				<td class="col action" if="$parent.showAction">
+					<a href="#" class="quickquote-btn action-duplicate" click="$parent.duplicateItem" if="product">+</a>
+					<a href="#" class="quickquote-btn action-delete" click="$parent.removeItem">x</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="lr-quickquote-action">
+		<div class="quickquote-grand-total" if="showGrandTotal">
+			<span text="grandTotalLabel"/> <span data-bind="text: getFormattedPrice(grandTotal())"/>
+		</div>
+		<button class="quickquote-btn" data-bind="disable: submitLoading" click="addItem" text="addBtnLabel"/>
+		<button class="quickquote-btn" data-bind="disable: submitLoading" click="emptyItems" text="emptyBtnLabel" if="showEmptyBtn"/>
+		<button class="quickquote-btn" data-bind="disable: submitLoading" click="submitItems" text="submitBtnLabel"/>
+		<div class="quickquote-spinner" if="submitLoading"><i></i></div>
+	</div>
+	<div class="lr-quickquote-multiskus" if="enableMultiskus">
+		<fieldset class="fieldset">
+			<div class="field">
+				<label class="label">
+					<span text="multiSkusLabel">
+				</label>
+				<div class="control">
+					<textarea class="textarea" rows="5" data-bind="value: skus"></textarea>
+					<p text="multiSkusDescription"/>
+				</div>
+			</div>
+			<div class="field">
+				<label class="label">
+					<span data-bind="i18n: 'Qty'"/>
+				</label>
+				<div class="control">
+					<input type="number" class="text" data-bind="value: qty" min="1"/>
+				</div>
+			</div>
+			<div class="field">
+				<button class="quickquote-btn" click="addToList" text="addToListBtnLabel"/>
+			</div>
+		</fieldset>
+	</div>
+	<div class="lr-quickquote-file" if="enableUpload">
+		<fieldset class="fieldset">
+			<div class="field">
+				<label class="label">
+					<span data-bind="i18n: 'Add from file'"/>
+				</label>
+				<p data-bind="text: fileRule"></p>
+				<div class="control">
+					<label class="file-uploader-button" for="quickquote-file"  data-bind="i18n: 'Choose File'"/>
+					<input type="file" id="quickquote-file" class="file" data-bind="files: { onLoaded: onLoadedFile, fileFilter: 'text/csv|application/vnd.ms-excel',onError: onErrorFile,onProgress: onProgressFile, readAs: 'text'}" />
+					<a attr="href: downloadSampleLink"><span data-bind="i18n: 'Download Sample Csv'"/></a>
+					<div class="quickquote-spinner" if="fileLoading"><i></i></div>
+					<p html="fileMessage"/>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>

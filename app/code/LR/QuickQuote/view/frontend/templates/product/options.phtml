@@ -1,0 +1,18 @@
+<?php
+$helper = $this->helper('\Magento\Catalog\Helper\Product\Configuration');
+?>
+<?php if ($_options = $block->getOptionList()):?>
+    <dl class="item-options">
+        <?php foreach ($_options as $_option) : ?>
+            <?php $_formatedOptionValue = $helper->getFormattedOptionValue($_option) ?>
+            <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+            <dd>
+                <?php if (isset($_formatedOptionValue['full_view'])): ?>
+                    <?= $_formatedOptionValue['full_view'] ?>
+                <?php else: ?>
+                    <?= $_formatedOptionValue['value'] ?>
+                <?php endif; ?>
+            </dd>
+        <?php endforeach; ?>
+    </dl>
+<?php endif;?>

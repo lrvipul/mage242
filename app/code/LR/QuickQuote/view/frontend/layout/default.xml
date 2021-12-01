@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Magezon_Core::css/swatches.css"/>
+		<css src="Magezon_Core::css/magnific-popup.css"/>
+	</head>
+	<body>
+		<referenceBlock name="header.links">
+			<block class="LR\QuickQuote\Block\Link" name="quickquote.top.link" ifconfig="quickquote/general/enabled"/>
+		</referenceBlock>
+	</body>
+</page>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+	<system>
+        <tab id="logicrays" translate="label" sortOrder="200" class="magezon-extensions">
+            <label><![CDATA[Logicrays Quick Quote]]></label>
+        </tab>
+		<section id="quickquote" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Quick Quote</label>
+			<tab>logicrays</tab>
+			<resource>LR_QuickQuote::settings</resource>
+			<group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="version" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Current Version</label>
+					<frontend_model>LR\QuickQuote\Block\Adminhtml\Renderer\Config\Version</frontend_model>
+				</field>
+				<field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Enable Quick Quote</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="route" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Route</label>
+					<comment><![CDATA[https://domain.com/<strong>quick-quote</strong>]]></comment>
+					<depends>
+						<field id="enable">1</field>
+					</depends>
+				</field>
+				<!-- <field id="instant_search" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Enable Instant Search</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="enable">1</field>
+					</depends>
+				</field> -->
+				<field id="enable_multiskus" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Enable Add Multiple SKUs</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_upload" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Enable Upload File</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Title</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_toplinks" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Show in Top Links</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="enable">1</field>
+					</depends>
+				</field>
+				<field id="head_background_color" translate="label comment" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Head Background Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="head_color" translate="label comment" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Head Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="button_color" translate="label comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Button Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="spinner_color" translate="label comment" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Spinner Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="link_color" translate="label comment" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Link Color</label>
+					<frontend_model>Magezon\Core\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+				</field>
+				<field id="customer_groups" translate="label comment" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Allow Customer Groups</label>
+					<source_model>LR\QuickQuote\Model\Config\Source\CustomerGroups</source_model>
+				</field>
+			</group>
+			<group id="search" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Search</label>
+				<field id="min_length" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Autocomplete minimum characters</label>
+					<comment>The minimum number of characters a user must type before a search is performed.</comment>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Show Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_sku" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Show Sku</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_price" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Show Price</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>
