@@ -63,6 +63,8 @@ atlassian*
 /pub/static/*
 !/pub/static/.htaccess
 
+!/setup/*
+!/lib/*
 /var/*
 !/var/.htaccess
 /vendor/*
