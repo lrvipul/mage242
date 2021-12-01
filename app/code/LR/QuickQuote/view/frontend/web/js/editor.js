@@ -132,10 +132,12 @@ define([
 
             $(self.popupSelector).on('click', '.action-select', function(e) {
                 e.preventDefault();
+                console.log("hihihii");
                 if (self.currentItem) {
                     var form = $('#product_addtocart_form');
                     if(form.valid()) {
                         var data      = form.serialize();
+                        console.log("data",data);
                         var startDate = $(self.popupSelector).find('#zonrentals-from').val();
                         var endDate   = $(self.popupSelector).find('#zonrentals-to').val();
                         if (startDate && endDate) {
@@ -152,6 +154,12 @@ define([
             $(self.popupSelector).on('click', '.addtolist-action-cancel', function(e) {
                 e.preventDefault();
                 $.magnificPopup.close();
+            });
+
+            $('.action-updateprice').on('click', function(e){
+                e.preventDefault();
+                console.log("this is herer");
+                $(this).closest('td').find('.input-text.qty').toggle();
             });
 
             $(self.popupSelector).on('click', '.addtolist-action-select', function(e) {
@@ -262,7 +270,7 @@ define([
 
         initObservable: function () {
             this._super()
-                .observe('grandTotal skus qty fileLoading submitLoading fileMessage loadingproduct')
+                .observe('grandTotal skus qty changePrice fileLoading submitLoading fileMessage loadingproduct')
                 .observe({
                     items: [],
                     products: []
@@ -474,8 +482,10 @@ define([
         },
 
         updatePrice: function (item) {
+            console.log("this",$(this));
             var data = item.getData();
-            console.log("data = "+data);
+            
+            console.log("data = ",data);
             console.log("data price = "+data.price);
             /* data['parent'] = this;
             this.items.push(new Item(data)); */
@@ -583,6 +593,7 @@ define([
 
         loadItemInfo: function(item) {
             var self = this;
+            console.log("sdfdsf");
             $.ajax({
                 url: this.loadItemInfoUrl,
                 data: {product: item.product().value, type: item.product().type, options: item.options(),mode: self.mode},

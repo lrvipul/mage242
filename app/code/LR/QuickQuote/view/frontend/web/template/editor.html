@@ -24,7 +24,7 @@
 			</tr>
 		</thead>
 		<tbody data-bind="foreach: items">
-			<tr class="item-info">
+			<tr class="item-info" >
 				<td class="col search">
 					<div class="lr-quickquote-search">
 						<input type="text" data-bind="textInput: search" attr="id: uid,placeholder: $parent.searchPlaceholder" autocomplete="off"/>
@@ -60,10 +60,10 @@
 				</td>
 				<td class="col price" if="$parent.showPrice">
 					<div class="quickquote-spinner" if="loadingPrice()"><i></i></div>
-					<span class="price" text="$parent.getFormattedPrice(price())" if="product&&!loadingPrice()"/>
+					<span class="price" text="$parent.getFormattedPrice(getPriceofItem())" if="product&&!loadingPrice()"/>
 					
-					<a href="#" class="quickquote-btn action-updateprice" if="product" click="$parent.updatePrice">../</a>
-					<input type="number" data-bind="value: price" min="1" class="input-text qty" if="product" visible="0"/>
+					<a href="#" class="quickquote-btn action-updateprice" if="product" data-bind="attr: { for: 'showprice' + $index() }"  click="$parent.updatePrice">../</a>
+					<input type="number" data-bind="value: changePrice, attr: { id: 'showprice' + $index() }" min="1" class="input-text price" if="product" visible="1"/>
 				</td>
 				<td class="col qty" if="$parent.showQty">
 					<input type="number" data-bind="value: qty" min="1" class="input-text qty" if="product" visible="qtyVisible"/>

@@ -15,6 +15,7 @@ define([
         this.product         = ko.observable(data['product'] ? data['product'] : '');
         this.price           = ko.observable(data['price'] ? data['price'] : 0);
         this.qty             = ko.observable(data['qty'] ? parseFloat(data['qty']) : 1);
+        this.changePrice     = ko.observable(data['changePrice'] ? parseFloat(data['changePrice']) : 0);
         this.options         = ko.observable(data['options'] ? data['options'] : []);
         this.optionsHtml     = ko.observable(data['optionsHtml'] ? data['optionsHtml'] : '');
         this.message         = ko.observable(data['message'] ? data['message'] : '');
@@ -34,6 +35,7 @@ define([
             return {
                 product: self.product(),
                 price: self.price(),
+                changePrice: self.changePrice(),
                 qty: self.qty(),
                 options: self.options(),
                 optionsHtml: self.optionsHtml(),
@@ -42,10 +44,10 @@ define([
                 quoteType: self.quoteType()
             }
         }
-
+        
         self.subtotal = ko.pureComputed(function() {
             self.checkValid();
-            return (self.product() ? self.price() * self.qty() : 0);
+            return (self.product() ? self.getPriceofItem() * self.qty() : 0);
         });
 
         self.parent.products.subscribe(function(products) {
@@ -102,7 +104,7 @@ define([
                 self.loadingPrice(true);
                 $.ajax({
                     url: self.parent.loadItemInfoUrl,
-                    data: {product: self.product().value, type: self.product().type, options: self.options(), qty: self.qty(), mode: self.mode},
+                    data: {product: self.product().value, type: self.product().type, options: self.options(), qty: self.qty(), mode: self.mode,newprice:self.changePrice()},
                     type: 'post',
                     dataType: 'json',
                     success: function (res) {
@@ -122,6 +124,14 @@ define([
             } else {
                 self.message('');
             }
+        }
+
+        self.getPriceofItem = function()
+        {
+            var price = self.price();
+            if(self.changePrice() > 0)
+                price = self.changePrice();
+            return price;
         }
 
         self.isValid = function() {
